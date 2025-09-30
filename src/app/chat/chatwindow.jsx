@@ -19,7 +19,7 @@ const ChatWindow = ({ selectedForm }) => {
       //   const API_BASE_URL = "https://d2201069cf20.ngrok-free.app";
 
   
-        const response = await fetch('http://16.16.124.142:8000/query/' + message);
+        const response = await fetch('https://taxes.memehome.io/query/' + message);
         // const url = `http://127.0.0.1:8000/query/${encodeURIComponent(message)}?selected_form=${encodeURIComponent(selectedForm)}`;
         // const response = await fetch(url);
 
