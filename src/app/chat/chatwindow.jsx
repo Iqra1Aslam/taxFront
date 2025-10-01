@@ -5,6 +5,8 @@ import { useState, useRef } from 'react';
 const ChatWindow = ({ selectedForm }) => {
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
+  const [loading, setLoading] = useState(false);
+
   const messagesEndRef = useRef(null);
 
   const sendMessage = async (e) => {
@@ -38,7 +40,10 @@ const ChatWindow = ({ selectedForm }) => {
       } catch (error) {
         console.error('Error fetching bot response:', error);
       }
-
+       finally {
+      setLoading(false); // stop loader
+      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
       
     }
   };
@@ -54,6 +59,12 @@ const ChatWindow = ({ selectedForm }) => {
             {msg.text}
           </div>
         ))}
+           {/* Loader */}
+        {loading && (
+          <div className="mb-2 p-3 rounded-lg text-sm w-fit max-w-[70%] bg-primary text-white self-start animate-pulse">
+            Bot is typing...
+          </div>
+        )}
         <div ref={messagesEndRef} />
       </div>
       <form onSubmit={sendMessage} className="flex flex-col">
