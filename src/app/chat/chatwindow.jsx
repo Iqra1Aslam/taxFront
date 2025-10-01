@@ -16,7 +16,7 @@ const ChatWindow = ({ selectedForm }) => {
       setMessages(newMessages);
       setMessage('');
       messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-
+      setLoading(true);
       try {
       //   const API_BASE_URL = "https://d2201069cf20.ngrok-free.app";
 
@@ -40,10 +40,11 @@ const ChatWindow = ({ selectedForm }) => {
       } catch (error) {
         console.error('Error fetching bot response:', error);
       }
-       finally {
+      finally {
       setLoading(false); // stop loader
       messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     }
+
       
     }
   };
@@ -59,7 +60,7 @@ const ChatWindow = ({ selectedForm }) => {
             {msg.text}
           </div>
         ))}
-           {/* Loader */}
+          {/* Loader */}
         {loading && (
           <div className="mb-2 p-3 rounded-lg text-sm w-fit max-w-[70%] bg-primary text-white self-start animate-pulse">
             Bot is typing...
